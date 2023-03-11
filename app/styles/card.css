@@ -1,0 +1,33 @@
+.products__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.products__container {
+  padding: 20px 100px;
+}
+
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.products__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+}
+
+.products__item {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+@media (max-width: 800px) {
+  .products__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
