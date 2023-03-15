@@ -10,7 +10,7 @@
   width: 100%;
   height: 100vh;
   object-fit: cover;
-  filter: brightness(0.8) saturate(0.5);
+  filter: brightness(0.3) saturate(12);
   position: absolute;
   top: 0;
   left: 0;
@@ -26,7 +26,6 @@
 
 .container__title {
   font-size: 2rem;
-  /* text-transform: uppercase; */
   letter-spacing: 0.25rem;
   margin-bottom: 1rem;
 }
@@ -34,5 +33,20 @@
 .container__content::before {
   content: "WE LOVE REMIX";
   font-size: 1rem;
-  color: #1f8a70;
+  color: #00afff;
+  font-weight: 900;
+}
+
+.container__button {
+  text-decoration: none;
+  color: #ffffff;
+  background: #00afff;
+  padding: 10px 20px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.container__button:hover {
+  background: #000000;
 }

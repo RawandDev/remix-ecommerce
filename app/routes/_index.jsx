@@ -2,7 +2,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { commitSession, getSession } from "../session";
 import styles from "~/styles/home.css";
-import imgSrc from "~/styles/plant.jpg";
+import imgSrc from "~/styles/nike.jpg";
 import ProductsModel from "../db/products";
 import Card from "../components/Card";
 import cardStyles from "~/styles/card.css";

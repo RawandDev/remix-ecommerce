@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+}
+
+.container {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  margin: 0 20px;
+  flex-basis: 70%;
+}

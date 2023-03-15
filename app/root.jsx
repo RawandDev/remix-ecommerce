@@ -11,6 +11,7 @@ import {
 import Navbar from "./components/Navbar";
 import { getSession } from "./session";
 import styles from "./styles/globals.css";
+import navbarStyles from "./styles/navbar.css";
 
 export const meta = () => ({
   charset: "utf-8",
@@ -23,6 +24,10 @@ export function links() {
     {
       rel: "stylesheet",
       href: styles,
+    },
+    {
+      rel: "stylesheet",
+      href: navbarStyles,
     },
   ];
 }

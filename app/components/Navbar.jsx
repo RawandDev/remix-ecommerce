@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, NavLink } from "@remix-run/react";
 import React from "react";
 
 function Navbar({ carts }) {
@@ -9,15 +9,35 @@ function Navbar({ carts }) {
         position: "relative",
       }}
     >
-      <nav>
-        <ul>
-          <Link to="/">Home</Link>
-          <Link to="/products">Products</Link>
-          <Link to="/products/add">Add Product</Link>
-          <Link to="/cart">Cart</Link>
+      <nav className="nav-wrapper">
+        <ul className="nav-links">
+          <li className="nav-links__li">
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className="nav-links__li">
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/products"
+            >
+              Products
+            </NavLink>
+          </li>
+          <li className="nav-links__li">
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/cart"
+            >
+              Cart
+            </NavLink>
+          </li>
         </ul>
+        <div>{carts?.length}</div>
       </nav>
-      <div>{carts?.length}</div>
     </div>
   );
 }

@@ -1,0 +1,34 @@
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 50%;
+}
+
+.nav-links__li {
+  list-style: none;
+  padding: 10px 20px;
+}
+
+.nav-links__li a {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+}
+
+.active {
+  color: #00afff !important;
+}
+
+.nav-links__li a:hover {
+  color: #00afff;
+  transition: 0.3s ease-in-out;
+}

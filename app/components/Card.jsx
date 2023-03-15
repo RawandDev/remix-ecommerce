@@ -1,6 +1,6 @@
 import { Form, Link } from "@remix-run/react";
 
-function Card({ data, carts }) {
+function Card({ data, carts, shouldShowTitle = true }) {
   const MAP_TITLE = {
     top: "Top Products",
     shoes: "Shoes",
@@ -8,7 +8,9 @@ function Card({ data, carts }) {
 
   return (
     <div className="products__container">
-      <h2 className="products__title">{MAP_TITLE[data[0].category]}</h2>
+      {shouldShowTitle && (
+        <h2 className="products__title">{MAP_TITLE[data[0].category]}</h2>
+      )}
       <div className="products__list">
         {data.map((product) => (
           <div className="products__item" key={product._id}>
@@ -24,19 +26,19 @@ function Card({ data, carts }) {
                 <h3 className="products__name">{product.title}</h3>
               </Link>
               <p className="products__price">${product.price}</p>
-
               <Form method="post">
                 <input type="hidden" name="id" value={product._id} />
                 <button
                   type="submit"
-                  className="products__button"
-                  style={{
-                    backgroundColor: carts.some((cart) => cart === product._id)
-                      ? "red"
-                      : "green",
-                  }}
+                  className={`products__button ${
+                    carts?.some((cart) => cart === product._id)
+                      ? "products__button--added"
+                      : ""
+                  }`}
                 >
-                  Add to cart
+                  {carts?.some((cart) => cart === product._id)
+                    ? "Remove from cart"
+                    : "Add to cart"}
                 </button>
               </Form>
             </div>

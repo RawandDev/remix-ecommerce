@@ -26,6 +26,22 @@ img {
   flex-direction: column; */
 }
 
+.products__button {
+  background-color: #000000;
+  outline: none;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 2px;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.products__button--added {
+  background-color: #00afff;
+}
+
 @media (max-width: 800px) {
   .products__list {
     grid-template-columns: repeat(2, 1fr);
