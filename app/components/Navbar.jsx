@@ -2,6 +2,8 @@ import { Link, NavLink } from "@remix-run/react";
 import React from "react";
 
 function Navbar({ carts }) {
+  const activeClassName = ({ isActive }) => (isActive ? "active" : undefined);
+
   return (
     <div
       style={{
@@ -12,26 +14,17 @@ function Navbar({ carts }) {
       <nav className="nav-wrapper">
         <ul className="nav-links">
           <li className="nav-links__li">
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-            >
+            <NavLink to="/" className={activeClassName}>
               Home
             </NavLink>
           </li>
           <li className="nav-links__li">
-            <NavLink
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-              to="/products"
-            >
+            <NavLink className={activeClassName} to="/products">
               Products
             </NavLink>
           </li>
           <li className="nav-links__li">
-            <NavLink
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-              to="/cart"
-            >
+            <NavLink className={activeClassName} to="/cart">
               Cart
             </NavLink>
           </li>

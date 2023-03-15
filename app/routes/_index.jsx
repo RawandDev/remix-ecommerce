@@ -1,8 +1,8 @@
-import { json, redirect } from "@remix-run/node";
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import { commitSession, getSession } from "../session";
 import styles from "~/styles/home.css";
-import imgSrc from "~/styles/nike.jpg";
+import imgSrc from "~/assets/nike.jpg";
 import ProductsModel from "../db/products";
 import Card from "../components/Card";
 import cardStyles from "~/styles/card.css";
@@ -17,8 +17,6 @@ export async function loader({ request }) {
   const carts = session.get("cart") || [];
 
   return json({ top, shoes, carts });
-
-  // return json({ top, shoes });
 }
 
 export async function action({ request, params }) {
@@ -27,14 +25,18 @@ export async function action({ request, params }) {
   const form = Object.fromEntries(formData.entries());
 
   const cart = session.get("cart") || [];
-  if (cart.includes(form.id)) {
-    const index = cart.indexOf(form.id);
+  console.log(form);
+  if (cart.includes(form._id)) {
+    const index = cart.indexOf(form._id);
     if (index > -1) {
+      console.log("splice");
       cart.splice(index, 1);
     }
   } else {
-    cart.push(form.id);
+    cart.push(form._id);
   }
+
+  session.set("cart", cart);
 
   return json(
     { cart },

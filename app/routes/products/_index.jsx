@@ -1,17 +1,19 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import React from "react";
-import Filter from "../../components/Filter";
 import SidebarFilter from "../../components/SidebarFilter";
 import ProductsModel from "../../db/products";
 import { commitSession, getSession } from "../../session";
 import sidebarFilterStyles from "~/styles/sidebar-filters.css";
 import porductsStyles from "~/styles/products.css";
+import Card from "../../components/Card";
+import cardStyles from "~/styles/card.css";
 
 export function links() {
   return [
     { rel: "stylesheet", href: sidebarFilterStyles },
     { rel: "stylesheet", href: porductsStyles },
+    { rel: "stylesheet", href: cardStyles },
   ];
 }
 
@@ -29,7 +31,7 @@ export async function loader({ request }) {
   const cart = session.get("cart") || [];
   const addedToCartProducts = await ProductsModel.find({ _id: { $in: cart } });
 
-  console.log(category);
+  // console.log(category);
 
   if (category || price) {
     const filteredData = await ProductsModel.find({
@@ -47,25 +49,25 @@ export async function action({ request, params }) {
   const formData = await request.formData();
   const { _action } = Object.fromEntries(formData.entries());
 
-  // console.log(_action);
+  // if (_action === "addProduct") {
+  //   const form = await ProductsModel.create({
+  //     title: "Title lorem ipsum",
+  //     text: "Text lorem ipsum",
+  //     price: 100,
+  //     category: "top",
+  //     image: "https://picsum.photos/200/300",
+  //     createdAt: new Date(),
+  //   });
 
-  if (_action === "addProduct") {
-    const form = await ProductsModel.create({
-      title: "Title lorem ipsum",
-      text: "Text lorem ipsum",
-      price: 100,
-      category: "top",
-      image: "https://picsum.photos/200/300",
-      createdAt: new Date(),
-    });
-
-    return json(form);
-  }
-  const session = await getSession(request.headers.get("Cookie"));
+  //   return json(form);
+  // }
 
   if (_action === "addToCart") {
+    const session = await getSession(request.headers.get("Cookie"));
     const form = Object.fromEntries(formData.entries());
+
     const cart = session.get("cart") || [];
+    console.log(form);
     if (cart.includes(form._id)) {
       const index = cart.indexOf(form._id);
       if (index > -1) {
@@ -75,13 +77,14 @@ export async function action({ request, params }) {
       cart.push(form._id);
     }
 
-    session.set("cart", cart);
-
-    return redirect("/products", {
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    });
+    return json(
+      { cart },
+      {
+        headers: {
+          "Set-Cookie": await commitSession(session),
+        },
+      }
+    );
   }
 
   return null;
@@ -94,54 +97,17 @@ function Products() {
 
   return (
     <div className="wrapper">
-      {/* <Filter /> */}
-
       <SidebarFilter />
-      <div className="container">
-        {data.form.map((item) => {
-          return (
-            <div className="card" key={item._id}>
-              <h2>
-                <Link to={`/products/${item._id}`}>{item.title}</Link>
-              </h2>
-              <p>{item.text}</p>
-              <p>{item.price}</p>
-              <p
-                style={{
-                  backgroundColor: "green",
-                }}
-              >
-                {item.category} | Gender {item.gender}
-              </p>
-              <p>{item.createdAt}</p>
-              <Form method="post">
-                <input type="hidden" name="_id" value={item._id} />
-                <button
-                  type="submit"
-                  name="_action"
-                  value="addToCart"
-                  style={{
-                    backgroundColor: data.addedToCartProducts?.some(
-                      (product) => product._id === item._id
-                    )
-                      ? "red"
-                      : "green",
-                  }}
-                >
-                  Add to cart
-                </button>
-              </Form>
-            </div>
-          );
-        })}
-        <Form method="post">
-          <button type="submit" name="_action" value="addProduct">
-            Submit
-          </button>
-        </Form>
-      </div>
-
-      {/* <Outlet /> */}
+      <Card
+        data={data.form}
+        carts={data.addedToCartProducts}
+        shouldShowTitle={false}
+      />
+      {/* <Form method="post">
+        <button type="submit" name="_action" value="addProduct">
+          Submit
+        </button>
+      </Form> */}
     </div>
   );
 }

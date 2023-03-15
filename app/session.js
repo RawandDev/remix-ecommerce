@@ -6,7 +6,7 @@ const { getSession, commitSession, destroySession } =
       name: "cart",
 
       maxAge: 86400,
-      secrets: ["s3cret1"],
+      secrets: ["S3CR3T_K3Y"],
       secure: true,
     },
   });

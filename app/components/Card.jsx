@@ -27,14 +27,26 @@ function Card({ data, carts, shouldShowTitle = true }) {
               </Link>
               <p className="products__price">${product.price}</p>
               <Form method="post">
-                <input type="hidden" name="id" value={product._id} />
+                {/* we pass all values so the whole object will get into the carts */}
+                {Object.keys(product).map((key) => (
+                  <input
+                    type="hidden"
+                    name={key}
+                    value={product[key]}
+                    key={key}
+                  />
+                ))}
                 <button
                   type="submit"
                   className={`products__button ${
-                    carts?.some((cart) => cart === product._id)
+                    carts?.some(
+                      (cart) => cart === product._id || cart._id === product._id
+                    )
                       ? "products__button--added"
                       : ""
                   }`}
+                  name="_action"
+                  value="addToCart"
                 >
                   {carts?.some((cart) => cart === product._id)
                     ? "Remove from cart"

@@ -21,11 +21,6 @@ img {
   text-transform: uppercase;
 }
 
-.products__item {
-  /* display: flex;
-  flex-direction: column; */
-}
-
 .products__button {
   background-color: #000000;
   outline: none;
