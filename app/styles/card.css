@@ -5,7 +5,12 @@
 }
 
 .products__container {
-  padding: 20px 100px;
+  margin: 10px;
+  flex-basis: 80%;
+}
+
+.products__container--hidden {
+  flex-basis: 100%;
 }
 
 img {

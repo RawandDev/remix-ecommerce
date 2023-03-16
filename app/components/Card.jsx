@@ -1,13 +1,17 @@
 import { Form, Link } from "@remix-run/react";
 
-function Card({ data, carts, shouldShowTitle = true }) {
+function Card({ data, carts, shouldShowTitle = true, isFilterShown }) {
   const MAP_TITLE = {
     top: "Top Products",
     shoes: "Shoes",
   };
 
   return (
-    <div className="products__container">
+    <div
+      className={`products__container products__container--${
+        !isFilterShown ? "hidden" : ""
+      }`}
+    >
       {shouldShowTitle && (
         <h2 className="products__title">{MAP_TITLE[data[0].category]}</h2>
       )}

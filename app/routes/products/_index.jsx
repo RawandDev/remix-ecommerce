@@ -92,16 +92,21 @@ export async function action({ request, params }) {
 
 function Products() {
   const data = useLoaderData();
+  const [isFilterShown, setIsFilterShown] = React.useState(true);
 
   console.log(data);
 
   return (
     <div className="wrapper">
-      <SidebarFilter />
+      <SidebarFilter
+        isFilterShown={isFilterShown}
+        setIsFilterShown={setIsFilterShown}
+      />
       <Card
         data={data.form}
         carts={data.addedToCartProducts}
         shouldShowTitle={false}
+        isFilterShown={isFilterShown}
       />
       {/* <Form method="post">
         <button type="submit" name="_action" value="addProduct">
