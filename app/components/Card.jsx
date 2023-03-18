@@ -1,6 +1,12 @@
 import { Form, Link } from "@remix-run/react";
 
-function Card({ data, carts, shouldShowTitle = true, isFilterShown }) {
+function Card({
+  data,
+  carts,
+  shouldShowTitle = true,
+  isFilterShown,
+  shouldShowAddToCart = true,
+}) {
   const MAP_TITLE = {
     top: "Top Products",
     shoes: "Shoes",
@@ -40,30 +46,35 @@ function Card({ data, carts, shouldShowTitle = true, isFilterShown }) {
                     key={key}
                   />
                 ))}
-                <input
-                  type="number"
-                  name="quantity"
-                  defaultValue={1}
-                  min={1}
-                  max={10}
-                  className="products__quantity"
-                />
-                <button
-                  type="submit"
-                  className={`products__button ${
-                    carts?.some(
-                      (cart) => cart === product._id || cart._id === product._id
-                    )
-                      ? "products__button--added"
-                      : ""
-                  }`}
-                  name="_action"
-                  value="addToCart"
-                >
-                  {carts?.some((cart) => cart._id === product._id)
-                    ? "Add more"
-                    : "Add to cart"}
-                </button>
+                {shouldShowAddToCart && (
+                  <>
+                    <input
+                      type="number"
+                      name="quantity"
+                      defaultValue={1}
+                      min={1}
+                      max={10}
+                      className="products__quantity"
+                    />
+                    <button
+                      type="submit"
+                      className={`products__button ${
+                        carts?.some(
+                          (cart) =>
+                            cart === product._id || cart._id === product._id
+                        )
+                          ? "products__button--added"
+                          : ""
+                      }`}
+                      name="_action"
+                      value="addToCart"
+                    >
+                      {carts?.some((cart) => cart._id === product._id)
+                        ? "Add more"
+                        : "Add to cart"}
+                    </button>
+                  </>
+                )}
                 <button
                   type="submit"
                   name="_action"

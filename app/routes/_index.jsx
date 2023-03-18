@@ -58,6 +58,8 @@ export function links() {
 export default function Index() {
   const data = useLoaderData();
 
+  console.log(data);
+
   return (
     <div>
       <section className="container">
