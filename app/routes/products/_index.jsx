@@ -29,7 +29,8 @@ export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
 
   const cart = session.get("cart") || [];
-  const addedToCartProducts = await ProductsModel.find({ _id: { $in: cart } });
+  console.log(cart);
+  // const addedToCartProducts = await ProductsModel.find({ _id: { $in: cart } });
 
   // console.log(category);
 
@@ -40,9 +41,9 @@ export async function loader({ request }) {
       gender: gender || { $exists: true },
     });
 
-    return json({ form: filteredData, addedToCartProducts });
+    return json({ form: filteredData, addedToCartProducts: cart });
   }
-  return json({ form, addedToCartProducts });
+  return json({ form, addedToCartProducts: cart });
 }
 
 export async function action({ request, params }) {
@@ -67,18 +68,47 @@ export async function action({ request, params }) {
     const form = Object.fromEntries(formData.entries());
 
     const cart = session.get("cart") || [];
-    console.log(form);
-    if (cart.includes(form._id)) {
-      const index = cart.indexOf(form._id);
-      if (index > -1) {
-        cart.splice(index, 1);
-      }
+    console.log(cart.filter((item) => item._id === form._id));
+    if (cart.filter((item) => item._id === form._id).length) {
+      console.log("if", form, form._id);
+      // add quantity to the product
+      cart.map((item) => {
+        if (item._id === form._id) {
+          item.quantity = parseInt(item.quantity) + parseInt(form.quantity);
+        }
+
+        return item;
+      });
     } else {
-      cart.push(form._id);
+      console.log("else", form, form._id);
+      cart.push(form);
     }
+
+    session.set("cart", cart);
 
     return json(
       { cart },
+      {
+        headers: {
+          "Set-Cookie": await commitSession(session),
+        },
+      }
+    );
+  }
+
+  if (_action === "removeFromCart") {
+    const session = await getSession(request.headers.get("Cookie"));
+    const form = Object.fromEntries(formData.entries());
+
+    const cart = session.get("cart") || [];
+    const updatedCart = cart.filter((item) => item._id !== form._id);
+
+    // if (updatedCart.length) {
+    // }
+    session.set("cart", updatedCart);
+
+    return json(
+      { cart: updatedCart },
       {
         headers: {
           "Set-Cookie": await commitSession(session),

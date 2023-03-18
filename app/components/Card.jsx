@@ -40,6 +40,14 @@ function Card({ data, carts, shouldShowTitle = true, isFilterShown }) {
                     key={key}
                   />
                 ))}
+                <input
+                  type="number"
+                  name="quantity"
+                  defaultValue={1}
+                  min={1}
+                  max={10}
+                  className="products__quantity"
+                />
                 <button
                   type="submit"
                   className={`products__button ${
@@ -52,9 +60,17 @@ function Card({ data, carts, shouldShowTitle = true, isFilterShown }) {
                   name="_action"
                   value="addToCart"
                 >
-                  {carts?.some((cart) => cart === product._id)
-                    ? "Remove from cart"
+                  {carts?.some((cart) => cart._id === product._id)
+                    ? "Add more"
                     : "Add to cart"}
+                </button>
+                <button
+                  type="submit"
+                  name="_action"
+                  value="removeFromCart"
+                  disabled={!carts?.some((cart) => cart._id === product._id)}
+                >
+                  Remove cart
                 </button>
               </Form>
             </div>
