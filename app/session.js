@@ -6,7 +6,7 @@ const { getSession, commitSession, destroySession } =
       name: "cart",
 
       maxAge: 86400,
-      secrets: ["S3CR3T_K3Y"],
+      secrets: [process.env.SESSION_SECRET],
       secure: true,
     },
   });
