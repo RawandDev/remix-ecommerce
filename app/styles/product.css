@@ -11,12 +11,15 @@
   transition: all 0.5s ease;
 }
 
-.product-left {
+/* .product-left {
   display: flex;
   justify-content: space-around;
   margin-top: 30px;
-}
+} */
 
 .product-wrapper {
   overflow: hidden;
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-around;
 }

@@ -47,3 +47,18 @@ img {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.products__form {
+  display: flex;
+  gap: 10px;
+  margin: 10px;
+  align-items: center;
+}
+
+.products__button--remove {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}

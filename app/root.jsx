@@ -34,7 +34,6 @@ export function links() {
 }
 
 export async function loader({ request }) {
-  // get cart from session
   const session = await getSession(request.headers.get("Cookie"));
   const cart = session.get("cart") || [];
 

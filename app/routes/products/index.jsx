@@ -1,5 +1,5 @@
-import { json, redirect } from "@remix-run/node";
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import React from "react";
 import SidebarFilter from "../../components/SidebarFilter";
 import ProductsModel from "../../db/products";
@@ -29,10 +29,6 @@ export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
 
   const cart = session.get("cart") || [];
-  console.log(cart);
-  // const addedToCartProducts = await ProductsModel.find({ _id: { $in: cart } });
-
-  // console.log(category);
 
   if (category || price) {
     const filteredData = await ProductsModel.find({
@@ -50,28 +46,12 @@ export async function action({ request, params }) {
   const formData = await request.formData();
   const { _action } = Object.fromEntries(formData.entries());
 
-  // if (_action === "addProduct") {
-  //   const form = await ProductsModel.create({
-  //     title: "Title lorem ipsum",
-  //     text: "Text lorem ipsum",
-  //     price: 100,
-  //     category: "top",
-  //     image: "https://picsum.photos/200/300",
-  //     createdAt: new Date(),
-  //   });
-
-  //   return json(form);
-  // }
-
   if (_action === "addToCart") {
     const session = await getSession(request.headers.get("Cookie"));
     const form = Object.fromEntries(formData.entries());
 
     const cart = session.get("cart") || [];
-    console.log(cart.filter((item) => item._id === form._id));
     if (cart.filter((item) => item._id === form._id).length) {
-      console.log("if", form, form._id);
-      // add quantity to the product
       cart.map((item) => {
         if (item._id === form._id) {
           item.quantity = parseInt(item.quantity) + parseInt(form.quantity);
@@ -80,7 +60,6 @@ export async function action({ request, params }) {
         return item;
       });
     } else {
-      console.log("else", form, form._id);
       cart.push(form);
     }
 
@@ -103,8 +82,6 @@ export async function action({ request, params }) {
     const cart = session.get("cart") || [];
     const updatedCart = cart.filter((item) => item._id !== form._id);
 
-    // if (updatedCart.length) {
-    // }
     session.set("cart", updatedCart);
 
     return json(
@@ -123,8 +100,6 @@ export async function action({ request, params }) {
 function Products() {
   const data = useLoaderData();
   const [isFilterShown, setIsFilterShown] = React.useState(true);
-
-  console.log(data);
 
   return (
     <div className="wrapper">

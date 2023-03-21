@@ -7,9 +7,7 @@ export function links() {
   return [{ rel: "stylesheet", href: styles }];
 }
 
-export async function loader({ request, params }) {
-  console.log("params", params);
-
+export async function loader({ params }) {
   const product = ProductsModel.findOne({ _id: params.slug });
 
   return product;
@@ -19,7 +17,12 @@ function Cart() {
   const data = useLoaderData();
 
   return (
-    <div className="product-wrapper">
+    <div
+      className="product-wrapper"
+      style={{
+        position: "relative",
+      }}
+    >
       <div className="product-left">
         <motion.div>
           <motion.img
@@ -37,6 +40,14 @@ function Cart() {
       <div className="product-right">
         <p>
           {data.text} <strong>${data.price}</strong>
+        </p>
+        <p
+          style={{
+            position: "absolute",
+            bottom: "0",
+          }}
+        >
+          Created at: {data.createdAt}
         </p>
       </div>
     </div>

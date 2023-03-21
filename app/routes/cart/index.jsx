@@ -1,4 +1,4 @@
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import Card from "../../components/Card";
 import { commitSession, getSession } from "../../session";
@@ -14,32 +14,16 @@ export async function loader({ request }) {
   return json({ carts });
 }
 
-export async function action({ request, params }) {
+export async function action({ request }) {
   const formData = await request.formData();
   const { _action } = Object.fromEntries(formData.entries());
-
-  // if (_action === "addProduct") {
-  //   const form = await ProductsModel.create({
-  //     title: "Title lorem ipsum",
-  //     text: "Text lorem ipsum",
-  //     price: 100,
-  //     category: "top",
-  //     image: "https://picsum.photos/200/300",
-  //     createdAt: new Date(),
-  //   });
-
-  //   return json(form);
-  // }
 
   if (_action === "addToCart") {
     const session = await getSession(request.headers.get("Cookie"));
     const form = Object.fromEntries(formData.entries());
 
     const cart = session.get("cart") || [];
-    console.log(cart.filter((item) => item._id === form._id));
     if (cart.filter((item) => item._id === form._id).length) {
-      console.log("if", form, form._id);
-      // add quantity to the product
       cart.map((item) => {
         if (item._id === form._id) {
           item.quantity = parseInt(item.quantity) + parseInt(form.quantity);
@@ -48,7 +32,6 @@ export async function action({ request, params }) {
         return item;
       });
     } else {
-      console.log("else", form, form._id);
       cart.push(form);
     }
 
@@ -71,8 +54,6 @@ export async function action({ request, params }) {
     const cart = session.get("cart") || [];
     const updatedCart = cart.filter((item) => item._id !== form._id);
 
-    // if (updatedCart.length) {
-    // }
     session.set("cart", updatedCart);
 
     return json(
@@ -90,7 +71,6 @@ export async function action({ request, params }) {
 
 function Cart() {
   const data = useLoaderData();
-  console.log(data);
   return (
     <div>
       {data.carts.length ? (

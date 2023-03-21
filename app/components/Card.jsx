@@ -60,7 +60,7 @@ function Card({
                 <h3 className="products__name">{product.title}</h3>
               </Link>
               <p className="products__price">${product.price}</p>
-              <Form method="post">
+              <Form method="post" className="products__form">
                 {/* we pass all values so the whole object will get into the carts */}
                 {Object.keys(product).map((key) => (
                   <input
@@ -104,8 +104,22 @@ function Card({
                   name="_action"
                   value="removeFromCart"
                   disabled={!carts?.some((cart) => cart._id === product._id)}
+                  className="products__button--remove"
+                  title="Remove from cart"
                 >
-                  Remove cart
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
                 </button>
               </Form>
             </div>
