@@ -302,47 +302,141 @@ function App() {
   }, this);
 }
 
+// app/routes/products/$slug.jsx
+var slug_exports = {};
+__export(slug_exports, {
+  default: () => slug_default,
+  links: () => links2,
+  loader: () => loader2
+});
+var import_node4 = require("@remix-run/node"), import_react5 = require("@remix-run/react");
+
+// app/db/db.js
+var import_mongoose = __toESM(require("mongoose")), db;
+connect();
+async function connect() {
+  return db || (global.__db || (global.__db = await import_mongoose.default.connect(process.env.MONGODB_URL, {
+    useNewUrlParser: !0
+  })), db = global.__db, db);
+}
+
+// app/db/products.js
+var productsSchema = new import_mongoose.default.Schema({
+  id: String,
+  title: String,
+  text: String,
+  image: String,
+  price: Number,
+  category: String,
+  createdAt: Date,
+  updatedAt: Date
+}), ProductsModel;
+try {
+  ProductsModel = import_mongoose.default.model("products");
+} catch {
+  ProductsModel = import_mongoose.default.model("products", productsSchema);
+}
+var products_default = ProductsModel;
+
+// app/styles/product.css
+var product_default = "/build/_assets/product-NRWWX2HH.css";
+
+// app/routes/products/$slug.jsx
+var import_jsx_dev_runtime4 = require("react/jsx-dev-runtime");
+function links2() {
+  return [{ rel: "stylesheet", href: product_default }];
+}
+async function loader2({ request, params }) {
+  return console.log("params", params), products_default.findOne({ _id: params.slug });
+}
+function Cart() {
+  let data = (0, import_react5.useLoaderData)(), navigation = (0, import_react5.useNavigation)();
+  return console.log("navigation", navigation), /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "product-container", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "product-left", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("img", { src: data.image, alt: data.title, className: "product-image" }, void 0, !1, {
+        fileName: "app/routes/products/$slug.jsx",
+        lineNumber: 27,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("h1", { className: "product-title", children: data.title }, void 0, !1, {
+        fileName: "app/routes/products/$slug.jsx",
+        lineNumber: 28,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/products/$slug.jsx",
+      lineNumber: 26,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "product-right", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("p", { children: [
+      data.text,
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("strong", { children: [
+        "$",
+        data.price
+      ] }, void 0, !0, {
+        fileName: "app/routes/products/$slug.jsx",
+        lineNumber: 32,
+        columnNumber: 23
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/products/$slug.jsx",
+      lineNumber: 31,
+      columnNumber: 9
+    }, this) }, void 0, !1, {
+      fileName: "app/routes/products/$slug.jsx",
+      lineNumber: 30,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/products/$slug.jsx",
+    lineNumber: 25,
+    columnNumber: 5
+  }, this);
+}
+var slug_default = Cart;
+
 // app/routes/products/index.jsx
 var products_exports = {};
 __export(products_exports, {
   action: () => action,
   default: () => products_default3,
-  links: () => links2,
-  loader: () => loader2
+  links: () => links3,
+  loader: () => loader3
 });
-var import_node4 = require("@remix-run/node"), import_react8 = require("@remix-run/react"), import_react9 = __toESM(require("react"));
+var import_node5 = require("@remix-run/node"), import_react9 = require("@remix-run/react"), import_react10 = __toESM(require("react"));
 
 // app/components/SidebarFilter.jsx
-var import_react5 = require("@remix-run/react"), import_react6 = __toESM(require("react")), import_jsx_dev_runtime4 = require("react/jsx-dev-runtime");
+var import_react6 = require("@remix-run/react"), import_react7 = __toESM(require("react")), import_jsx_dev_runtime5 = require("react/jsx-dev-runtime");
 function SidebarFilter({ isFilterShown, setIsFilterShown }) {
-  let ref = import_react6.default.useRef(null), submit = (0, import_react5.useSubmit)(), [params] = (0, import_react5.useSearchParams)();
+  let ref = import_react7.default.useRef(null), submit = (0, import_react6.useSubmit)(), [params] = (0, import_react6.useSearchParams)();
   function handleChange() {
     ref && submit(ref.current, {
       replace: !0
     });
   }
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
-    import_react5.Form,
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+    import_react6.Form,
     {
       method: "get",
       className: `sidebar-form ${isFilterShown ? "" : "hidden"}`,
       ref,
       onChange: handleChange,
       children: [
-        isFilterShown ? /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "sidebar-container", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "price-filter", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("p", { className: "price-filter__title", children: "Price" }, void 0, !1, {
+        isFilterShown ? /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "sidebar-container", children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "price-filter", children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("p", { className: "price-filter__title", children: "Price" }, void 0, !1, {
               fileName: "app/components/SidebarFilter.jsx",
               lineNumber: 27,
               columnNumber: 13
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "price-filter__range", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("span", { children: "MIN" }, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "price-filter__range", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "MIN" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 29,
                 columnNumber: 15
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
                 "input",
                 {
                   type: "number",
@@ -364,13 +458,13 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
               lineNumber: 28,
               columnNumber: 13
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "price-filter__range", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("span", { children: "MAX" }, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "price-filter__range", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "MAX" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 38,
                 columnNumber: 15
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
                 "input",
                 {
                   type: "number",
@@ -397,21 +491,21 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
             lineNumber: 26,
             columnNumber: 11
           }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "category-filter", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("p", { className: "price-filter__title", children: "Category" }, void 0, !1, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "category-filter", children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("p", { className: "price-filter__title", children: "Category" }, void 0, !1, {
               fileName: "app/components/SidebarFilter.jsx",
               lineNumber: 48,
               columnNumber: 13
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "category-filter__type", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "category-filter__type", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
                 "input",
                 {
                   type: "checkbox",
                   name: "category",
                   id: "top",
                   value: "top",
-                  defaultChecked: params.get("category") === "top"
+                  defaultChecked: params.getAll("category").includes("top")
                 },
                 void 0,
                 !1,
@@ -422,7 +516,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
                 },
                 this
               ),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("label", { htmlFor: "top", children: "Top" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("label", { htmlFor: "top", children: "Top" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 57,
                 columnNumber: 15
@@ -432,15 +526,15 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
               lineNumber: 49,
               columnNumber: 13
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "category-filter__type", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "category-filter__type", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
                 "input",
                 {
                   type: "checkbox",
                   name: "category",
                   id: "bottom",
                   value: "bottom",
-                  defaultChecked: params.get("category") === "bottom"
+                  defaultChecked: params.getAll("category").includes("bottom")
                 },
                 void 0,
                 !1,
@@ -451,7 +545,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
                 },
                 this
               ),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("label", { htmlFor: "bottom", children: "Bottom" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("label", { htmlFor: "bottom", children: "Bottom" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 67,
                 columnNumber: 15
@@ -461,15 +555,15 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
               lineNumber: 59,
               columnNumber: 13
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "category-filter__type", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "category-filter__type", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
                 "input",
                 {
                   type: "checkbox",
                   name: "category",
                   id: "shoes",
                   value: "shoes",
-                  defaultChecked: params.get("category") === "shoes"
+                  defaultChecked: params.getAll("category").includes("shoes")
                 },
                 void 0,
                 !1,
@@ -480,7 +574,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
                 },
                 this
               ),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("label", { htmlFor: "shoes", children: "Shoes" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("label", { htmlFor: "shoes", children: "Shoes" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 77,
                 columnNumber: 15
@@ -495,24 +589,24 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
             lineNumber: 47,
             columnNumber: 11
           }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "gender-filter", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("p", { className: "price-filter__title", children: "Gender" }, void 0, !1, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "gender-filter", children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("p", { className: "price-filter__title", children: "Gender" }, void 0, !1, {
               fileName: "app/components/SidebarFilter.jsx",
               lineNumber: 81,
               columnNumber: 13
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("select", { name: "gender", defaultValue: params.get("gender"), children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("option", { value: "", children: "All" }, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("select", { name: "gender", defaultValue: params.get("gender"), children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("option", { value: "", children: "All" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 83,
                 columnNumber: 15
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("option", { value: "male", children: "Male" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("option", { value: "male", children: "Male" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 84,
                 columnNumber: 15
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("option", { value: "female", children: "Female" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("option", { value: "female", children: "Female" }, void 0, !1, {
                 fileName: "app/components/SidebarFilter.jsx",
                 lineNumber: 85,
                 columnNumber: 15
@@ -532,7 +626,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
           lineNumber: 25,
           columnNumber: 9
         }, this) : null,
-        /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
           "svg",
           {
             xmlns: "http://www.w3.org/2000/svg",
@@ -544,7 +638,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
             onClick: () => {
               setIsFilterShown((prev) => !prev);
             },
-            children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+            children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
               "path",
               {
                 strokeLinecap: "round",
@@ -584,33 +678,6 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
 }
 var SidebarFilter_default = SidebarFilter;
 
-// app/db/db.js
-var import_mongoose = __toESM(require("mongoose")), db;
-connect();
-async function connect() {
-  return db || (global.__db || (global.__db = await import_mongoose.default.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: !0
-  })), db = global.__db, db);
-}
-
-// app/db/products.js
-var productsSchema = new import_mongoose.default.Schema({
-  id: String,
-  title: String,
-  text: String,
-  image: String,
-  price: Number,
-  category: String,
-  createdAt: Date,
-  updatedAt: Date
-}), ProductsModel;
-try {
-  ProductsModel = import_mongoose.default.model("products");
-} catch {
-  ProductsModel = import_mongoose.default.model("products", productsSchema);
-}
-var products_default = ProductsModel;
-
 // app/styles/sidebar-filters.css
 var sidebar_filters_default = "/build/_assets/sidebar-filters-6LC6JEAR.css";
 
@@ -618,7 +685,7 @@ var sidebar_filters_default = "/build/_assets/sidebar-filters-6LC6JEAR.css";
 var products_default2 = "/build/_assets/products-6XCS2SSZ.css";
 
 // app/components/Card.jsx
-var import_react7 = require("@remix-run/react"), import_jsx_dev_runtime5 = require("react/jsx-dev-runtime");
+var import_react8 = require("@remix-run/react"), import_jsx_dev_runtime6 = require("react/jsx-dev-runtime");
 function Card({
   data,
   carts,
@@ -626,12 +693,12 @@ function Card({
   isFilterShown,
   shouldShowAddToCart = !0
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
     "div",
     {
       className: `products__container products__container--${isFilterShown ? "" : "hidden"}`,
       children: [
-        shouldShowTitle && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("h2", { className: "products__title", children: {
+        shouldShowTitle && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("h2", { className: "products__title", children: {
           top: "Top Products",
           shoes: "Shoes"
         }[data[0].category] }, void 0, !1, {
@@ -639,8 +706,8 @@ function Card({
           lineNumber: 22,
           columnNumber: 9
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "products__list", children: data.map((product) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "products__item", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react7.Link, { to: `/products/${product._id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "products__list", children: data.map((product) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "products__item", children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react8.Link, { to: `/products/${product._id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
             "img",
             {
               src: product.image,
@@ -660,8 +727,8 @@ function Card({
             lineNumber: 27,
             columnNumber: 13
           }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "products__info", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react7.Link, { to: `/products/${product._id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("h3", { className: "products__name", children: product.title }, void 0, !1, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "products__info", children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react8.Link, { to: `/products/${product._id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("h3", { className: "products__name", children: product.title }, void 0, !1, {
               fileName: "app/components/Card.jsx",
               lineNumber: 36,
               columnNumber: 17
@@ -670,7 +737,7 @@ function Card({
               lineNumber: 35,
               columnNumber: 15
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("p", { className: "products__price", children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("p", { className: "products__price", children: [
               "$",
               product.price
             ] }, void 0, !0, {
@@ -678,8 +745,8 @@ function Card({
               lineNumber: 38,
               columnNumber: 15
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react7.Form, { method: "post", children: [
-              Object.keys(product).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+            /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react8.Form, { method: "post", children: [
+              Object.keys(product).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
                 "input",
                 {
                   type: "hidden",
@@ -695,8 +762,8 @@ function Card({
                 },
                 this
               )),
-              shouldShowAddToCart && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_jsx_dev_runtime5.Fragment, { children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+              shouldShowAddToCart && /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: [
+                /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
                   "input",
                   {
                     type: "number",
@@ -715,7 +782,7 @@ function Card({
                   },
                   this
                 ),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+                /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
                   "button",
                   {
                     type: "submit",
@@ -740,7 +807,7 @@ function Card({
                 lineNumber: 50,
                 columnNumber: 19
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
+              /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
                 "button",
                 {
                   type: "submit",
@@ -795,15 +862,15 @@ var Card_default = Card;
 var card_default = "/build/_assets/card-BRLWFRAC.css";
 
 // app/routes/products/index.jsx
-var import_jsx_dev_runtime6 = require("react/jsx-dev-runtime");
-function links2() {
+var import_jsx_dev_runtime7 = require("react/jsx-dev-runtime");
+function links3() {
   return [
     { rel: "stylesheet", href: sidebar_filters_default },
     { rel: "stylesheet", href: products_default2 },
     { rel: "stylesheet", href: card_default }
   ];
 }
-async function loader2({ request }) {
+async function loader3({ request }) {
   let form = await products_default.find(), url = new URL(request.url), category = url.searchParams.getAll("category"), min = url.searchParams.get("min"), max = url.searchParams.get("max"), price = min || max ? { $gte: min || 0, $lte: max || 999999 } : null, gender = url.searchParams.get("gender"), cart = (await getSession(request.headers.get("Cookie"))).get("cart") || [];
   if (console.log(cart), category || price) {
     let filteredData = await products_default.find({
@@ -811,15 +878,15 @@ async function loader2({ request }) {
       price: price || { $exists: !0 },
       gender: gender || { $exists: !0 }
     });
-    return (0, import_node4.json)({ form: filteredData, addedToCartProducts: cart });
+    return (0, import_node5.json)({ form: filteredData, addedToCartProducts: cart });
   }
-  return (0, import_node4.json)({ form, addedToCartProducts: cart });
+  return (0, import_node5.json)({ form, addedToCartProducts: cart });
 }
 async function action({ request, params }) {
   let formData = await request.formData(), { _action } = Object.fromEntries(formData.entries());
   if (_action === "addToCart") {
     let session = await getSession(request.headers.get("Cookie")), form = Object.fromEntries(formData.entries()), cart = session.get("cart") || [];
-    return console.log(cart.filter((item) => item._id === form._id)), cart.filter((item) => item._id === form._id).length ? (console.log("if", form, form._id), cart.map((item) => (item._id === form._id && (item.quantity = parseInt(item.quantity) + parseInt(form.quantity)), item))) : (console.log("else", form, form._id), cart.push(form)), session.set("cart", cart), (0, import_node4.json)(
+    return console.log(cart.filter((item) => item._id === form._id)), cart.filter((item) => item._id === form._id).length ? (console.log("if", form, form._id), cart.map((item) => (item._id === form._id && (item.quantity = parseInt(item.quantity) + parseInt(form.quantity)), item))) : (console.log("else", form, form._id), cart.push(form)), session.set("cart", cart), (0, import_node5.json)(
       { cart },
       {
         headers: {
@@ -830,7 +897,7 @@ async function action({ request, params }) {
   }
   if (_action === "removeFromCart") {
     let session = await getSession(request.headers.get("Cookie")), form = Object.fromEntries(formData.entries()), updatedCart = (session.get("cart") || []).filter((item) => item._id !== form._id);
-    return session.set("cart", updatedCart), (0, import_node4.json)(
+    return session.set("cart", updatedCart), (0, import_node5.json)(
       { cart: updatedCart },
       {
         headers: {
@@ -842,9 +909,9 @@ async function action({ request, params }) {
   return null;
 }
 function Products() {
-  let data = (0, import_react8.useLoaderData)(), [isFilterShown, setIsFilterShown] = import_react9.default.useState(!0);
-  return console.log(data), /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "wrapper", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+  let data = (0, import_react9.useLoaderData)(), [isFilterShown, setIsFilterShown] = import_react10.default.useState(!0);
+  return console.log(data), /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "wrapper", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
       SidebarFilter_default,
       {
         isFilterShown,
@@ -859,7 +926,7 @@ function Products() {
       },
       this
     ),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(
       Card_default,
       {
         data: data.form,
@@ -884,118 +951,11 @@ function Products() {
 }
 var products_default3 = Products;
 
-// app/routes/index.jsx
-var routes_exports = {};
-__export(routes_exports, {
+// app/routes/cart/index.jsx
+var cart_exports = {};
+__export(cart_exports, {
   action: () => action2,
-  default: () => Index,
-  links: () => links3,
-  loader: () => loader3
-});
-var import_node5 = require("@remix-run/node"), import_react10 = require("@remix-run/react");
-
-// app/styles/home.css
-var home_default = "/build/_assets/home-AJ5NRWXH.css";
-
-// app/assets/nike.jpg
-var nike_default = "/build/_assets/nike-G37O4RDL.jpg";
-
-// app/routes/index.jsx
-var import_jsx_dev_runtime7 = require("react/jsx-dev-runtime");
-async function loader3({ request }) {
-  let session = await getSession(request.headers.get("Cookie")), [top, shoes] = await Promise.all([
-    await products_default.find({ category: "top" }).limit(3),
-    await products_default.find({ category: "shoes" }).limit(3)
-  ]), carts = session.get("cart") || [];
-  return (0, import_node5.json)({ top, shoes, carts });
-}
-async function action2({ request, params }) {
-  let formData = await request.formData(), session = await getSession(request.headers.get("Cookie")), form = Object.fromEntries(formData.entries()), cart = session.get("cart") || [];
-  if (console.log(form), cart.includes(form._id)) {
-    let index = cart.indexOf(form._id);
-    index > -1 && (console.log("splice"), cart.splice(index, 1));
-  } else
-    cart.push(form._id);
-  return session.set("cart", cart), (0, import_node5.json)(
-    { cart },
-    {
-      headers: {
-        "Set-Cookie": await commitSession(session)
-      }
-    }
-  );
-}
-function links3() {
-  return [
-    { rel: "stylesheet", href: home_default },
-    { rel: "stylesheet", href: card_default }
-  ];
-}
-function Index() {
-  let data = (0, import_react10.useLoaderData)();
-  return console.log(data), /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("section", { className: "container", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("img", { className: "hero-image", src: nike_default, alt: "plant" }, void 0, !1, {
-        fileName: "app/routes/index.jsx",
-        lineNumber: 66,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "container__content", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("h1", { className: "container__title", children: [
-          "Incredible Selection, Unbeatable Prices \u2013 Get Ready to Fall in Love with",
-          /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("span", { children: " Recommerce" }, void 0, !1, {
-            fileName: "app/routes/index.jsx",
-            lineNumber: 71,
-            columnNumber: 13
-          }, this)
-        ] }, void 0, !0, {
-          fileName: "app/routes/index.jsx",
-          lineNumber: 68,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_react10.Link, { to: "/products", className: "container__button", children: "Shop Now" }, void 0, !1, {
-          fileName: "app/routes/index.jsx",
-          lineNumber: 73,
-          columnNumber: 11
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/index.jsx",
-        lineNumber: 67,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/index.jsx",
-      lineNumber: 65,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("section", { className: "products", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Card_default, { data: data.top, carts: data.carts }, void 0, !1, {
-        fileName: "app/routes/index.jsx",
-        lineNumber: 80,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Card_default, { data: data.shoes, carts: data.carts }, void 0, !1, {
-        fileName: "app/routes/index.jsx",
-        lineNumber: 81,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/index.jsx",
-      lineNumber: 79,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/index.jsx",
-    lineNumber: 64,
-    columnNumber: 5
-  }, this);
-}
-
-// app/routes/Cart.jsx
-var Cart_exports = {};
-__export(Cart_exports, {
-  action: () => action3,
-  default: () => Cart_default,
+  default: () => cart_default,
   links: () => links4,
   loader: () => loader4
 });
@@ -1008,7 +968,7 @@ async function loader4({ request }) {
   let carts = (await getSession(request.headers.get("Cookie"))).get("cart") || [];
   return (0, import_node6.json)({ carts });
 }
-async function action3({ request, params }) {
+async function action2({ request, params }) {
   let formData = await request.formData(), { _action } = Object.fromEntries(formData.entries());
   if (_action === "addToCart") {
     let session = await getSession(request.headers.get("Cookie")), form = Object.fromEntries(formData.entries()), cart = session.get("cart") || [];
@@ -1034,7 +994,7 @@ async function action3({ request, params }) {
   }
   return null;
 }
-function Cart() {
+function Cart2() {
   let data = (0, import_react11.useLoaderData)();
   return console.log(data), /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: data.carts.length ? /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
     Card_default,
@@ -1047,36 +1007,153 @@ function Cart() {
     void 0,
     !1,
     {
-      fileName: "app/routes/Cart.jsx",
+      fileName: "app/routes/cart/index.jsx",
       lineNumber: 97,
       columnNumber: 9
     },
     this
   ) : /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("h1", { children: "Cart is empty" }, void 0, !1, {
-      fileName: "app/routes/Cart.jsx",
+      fileName: "app/routes/cart/index.jsx",
       lineNumber: 105,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react11.Link, { to: "/products", children: "Go to products" }, void 0, !1, {
-      fileName: "app/routes/Cart.jsx",
+      fileName: "app/routes/cart/index.jsx",
       lineNumber: 106,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
-    fileName: "app/routes/Cart.jsx",
+    fileName: "app/routes/cart/index.jsx",
     lineNumber: 104,
     columnNumber: 9
   }, this) }, void 0, !1, {
-    fileName: "app/routes/Cart.jsx",
+    fileName: "app/routes/cart/index.jsx",
     lineNumber: 95,
     columnNumber: 5
   }, this);
 }
-var Cart_default = Cart;
+var cart_default = Cart2;
+
+// app/routes/index.jsx
+var routes_exports = {};
+__export(routes_exports, {
+  action: () => action3,
+  default: () => Index,
+  links: () => links5,
+  loader: () => loader5
+});
+var import_node7 = require("@remix-run/node"), import_react12 = require("@remix-run/react");
+
+// app/styles/home.css
+var home_default = "/build/_assets/home-AJ5NRWXH.css";
+
+// app/assets/nike.jpg
+var nike_default = "/build/_assets/nike-G37O4RDL.jpg";
+
+// app/routes/index.jsx
+var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime");
+async function loader5({ request }) {
+  let session = await getSession(request.headers.get("Cookie")), [top, shoes] = await Promise.all([
+    await products_default.find({ category: "top" }).limit(3),
+    await products_default.find({ category: "shoes" }).limit(3)
+  ]), carts = session.get("cart") || [];
+  return (0, import_node7.json)({ top, shoes, carts });
+}
+async function action3({ request, params }) {
+  let formData = await request.formData(), { _action } = Object.fromEntries(formData.entries());
+  if (_action === "addToCart") {
+    let session = await getSession(request.headers.get("Cookie")), form = Object.fromEntries(formData.entries()), cart = session.get("cart") || [];
+    return console.log(cart.filter((item) => item._id === form._id)), cart.filter((item) => item._id === form._id).length ? (console.log("if", form, form._id), cart.map((item) => (item._id === form._id && (item.quantity = parseInt(item.quantity) + parseInt(form.quantity)), item))) : (console.log("else", form, form._id), cart.push(form)), session.set("cart", cart), (0, import_node7.json)(
+      { cart },
+      {
+        headers: {
+          "Set-Cookie": await commitSession(session)
+        }
+      }
+    );
+  }
+  if (_action === "removeFromCart") {
+    let session = await getSession(request.headers.get("Cookie")), form = Object.fromEntries(formData.entries()), updatedCart = (session.get("cart") || []).filter((item) => item._id !== form._id);
+    return session.set("cart", updatedCart), (0, import_node7.json)(
+      { cart: updatedCart },
+      {
+        headers: {
+          "Set-Cookie": await commitSession(session)
+        }
+      }
+    );
+  }
+  return null;
+}
+function links5() {
+  return [
+    { rel: "stylesheet", href: home_default },
+    { rel: "stylesheet", href: card_default }
+  ];
+}
+function Index() {
+  let data = (0, import_react12.useLoaderData)();
+  return console.log(data), /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("section", { className: "container", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("img", { className: "hero-image", src: nike_default, alt: "plant" }, void 0, !1, {
+        fileName: "app/routes/index.jsx",
+        lineNumber: 111,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { className: "container__content", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("h1", { className: "container__title", children: [
+          "Incredible Selection, Unbeatable Prices \u2013 Get Ready to Fall in Love with",
+          /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("span", { children: " Recommerce" }, void 0, !1, {
+            fileName: "app/routes/index.jsx",
+            lineNumber: 116,
+            columnNumber: 13
+          }, this)
+        ] }, void 0, !0, {
+          fileName: "app/routes/index.jsx",
+          lineNumber: 113,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_react12.Link, { to: "/products", className: "container__button", children: "Shop Now" }, void 0, !1, {
+          fileName: "app/routes/index.jsx",
+          lineNumber: 118,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, !0, {
+        fileName: "app/routes/index.jsx",
+        lineNumber: 112,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/index.jsx",
+      lineNumber: 110,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("section", { className: "products", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(Card_default, { data: data.top, carts: data.carts }, void 0, !1, {
+        fileName: "app/routes/index.jsx",
+        lineNumber: 125,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(Card_default, { data: data.shoes, carts: data.carts }, void 0, !1, {
+        fileName: "app/routes/index.jsx",
+        lineNumber: 126,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/routes/index.jsx",
+      lineNumber: 124,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/routes/index.jsx",
+    lineNumber: 109,
+    columnNumber: 5
+  }, this);
+}
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "a11a447b", entry: { module: "/build/entry.client-IMUS3UUL.js", imports: ["/build/_shared/chunk-X6CU6HJT.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-VHZYFPBU.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/Cart": { id: "routes/Cart", parentId: "root", path: "Cart", index: void 0, caseSensitive: void 0, module: "/build/routes/Cart-YRJQWVCA.js", imports: ["/build/_shared/chunk-7HAQQ5G5.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-CSTILF3J.js", imports: ["/build/_shared/chunk-7HAQQ5G5.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/index": { id: "routes/products/index", parentId: "root", path: "products", index: !0, caseSensitive: void 0, module: "/build/routes/products/index-MNEGAA7Z.js", imports: ["/build/_shared/chunk-7HAQQ5G5.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-A11A447B.js" };
+var assets_manifest_default = { version: "987c380f", entry: { module: "/build/entry.client-NJZDFAEB.js", imports: ["/build/_shared/chunk-SKCRPN77.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-756X4VMU.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/cart/index": { id: "routes/cart/index", parentId: "root", path: "cart", index: !0, caseSensitive: void 0, module: "/build/routes/cart/index-OMN75YF4.js", imports: ["/build/_shared/chunk-J7AM3GA5.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-DH4UTIB4.js", imports: ["/build/_shared/chunk-J7AM3GA5.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/$slug": { id: "routes/products/$slug", parentId: "root", path: "products/:slug", index: void 0, caseSensitive: void 0, module: "/build/routes/products/$slug-LJIVIYIR.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/index": { id: "routes/products/index", parentId: "root", path: "products", index: !0, caseSensitive: void 0, module: "/build/routes/products/index-6IJQGORS.js", imports: ["/build/_shared/chunk-J7AM3GA5.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-987C380F.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public\\build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_routeConvention: !1 }, publicPath = "/build/", entry = { module: entry_server_node_exports }, routes = {
@@ -1088,6 +1165,14 @@ var assetsBuildDirectory = "public\\build", future = { unstable_cssModules: !1, 
     caseSensitive: void 0,
     module: root_exports
   },
+  "routes/products/$slug": {
+    id: "routes/products/$slug",
+    parentId: "root",
+    path: "products/:slug",
+    index: void 0,
+    caseSensitive: void 0,
+    module: slug_exports
+  },
   "routes/products/index": {
     id: "routes/products/index",
     parentId: "root",
@@ -1096,6 +1181,14 @@ var assetsBuildDirectory = "public\\build", future = { unstable_cssModules: !1, 
     caseSensitive: void 0,
     module: products_exports
   },
+  "routes/cart/index": {
+    id: "routes/cart/index",
+    parentId: "root",
+    path: "cart",
+    index: !0,
+    caseSensitive: void 0,
+    module: cart_exports
+  },
   "routes/index": {
     id: "routes/index",
     parentId: "root",
@@ -1103,14 +1196,6 @@ var assetsBuildDirectory = "public\\build", future = { unstable_cssModules: !1, 
     index: !0,
     caseSensitive: void 0,
     module: routes_exports
-  },
-  "routes/Cart": {
-    id: "routes/Cart",
-    parentId: "root",
-    path: "Cart",
-    index: void 0,
-    caseSensitive: void 0,
-    module: Cart_exports
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

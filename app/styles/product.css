@@ -1,0 +1,12 @@
+.product-image {
+  max-width: 400px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.product-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 50px;
+  transition: all 0.5s ease;
+}

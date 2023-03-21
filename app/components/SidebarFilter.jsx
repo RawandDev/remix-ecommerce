@@ -52,7 +52,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
                 name="category"
                 id="top"
                 value="top"
-                defaultChecked={params.get("category") === "top"}
+                defaultChecked={params.getAll("category").includes("top")}
               />
               <label htmlFor="top">Top</label>
             </div>
@@ -62,7 +62,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
                 name="category"
                 id="bottom"
                 value="bottom"
-                defaultChecked={params.get("category") === "bottom"}
+                defaultChecked={params.getAll("category").includes("bottom")}
               />
               <label htmlFor="bottom">Bottom</label>
             </div>
@@ -72,7 +72,7 @@ function SidebarFilter({ isFilterShown, setIsFilterShown }) {
                 name="category"
                 id="shoes"
                 value="shoes"
-                defaultChecked={params.get("category") === "shoes"}
+                defaultChecked={params.getAll("category").includes("shoes")}
               />
               <label htmlFor="shoes">Shoes</label>
             </div>

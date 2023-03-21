@@ -1,7 +1,7 @@
 import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import Card from "../components/Card";
-import { commitSession, getSession } from "../session";
+import Card from "../../components/Card";
+import { commitSession, getSession } from "../../session";
 import cardStyles from "~/styles/card.css";
 
 export function links() {
