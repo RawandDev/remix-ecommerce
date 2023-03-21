@@ -1,4 +1,5 @@
 import { Form, Link } from "@remix-run/react";
+import { motion } from "framer-motion";
 
 function Card({
   data,
@@ -23,14 +24,37 @@ function Card({
       )}
       <div className="products__list">
         {data.map((product) => (
-          <div className="products__item" key={product._id}>
-            <Link to={`/products/${product._id}`}>
-              <img
-                src={product.image}
-                alt={product.title}
-                className="products__image"
-              />
-            </Link>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="products__item"
+            key={product._id}
+          >
+            <div
+              style={{
+                height: "200px",
+                overflow: "hidden",
+              }}
+            >
+              <Link to={`/products/${product._id}`}>
+                <motion.img
+                  layoutId={product._id}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{
+                    duration: 0.3,
+                  }}
+                  initial={{
+                    x: 200,
+                  }}
+                  animate={{
+                    x: 0,
+                  }}
+                  src={product.image}
+                  alt={product.title}
+                  className="products__image"
+                />
+              </Link>
+            </div>
             <div className="products__info">
               <Link to={`/products/${product._id}`}>
                 <h3 className="products__name">{product.title}</h3>
@@ -85,7 +109,7 @@ function Card({
                 </button>
               </Form>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

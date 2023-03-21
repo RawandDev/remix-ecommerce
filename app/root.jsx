@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import { getSession } from "./session";
 import styles from "./styles/globals.css";
 import navbarStyles from "./styles/navbar.css";
+import { AnimatePresence } from "framer-motion";
 
 export const meta = () => ({
   charset: "utf-8",
@@ -50,7 +51,9 @@ export default function App() {
       </head>
       <body>
         <Navbar carts={carts} />
-        <Outlet />
+        <AnimatePresence mode="wait">
+          <Outlet />
+        </AnimatePresence>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

@@ -1,7 +1,7 @@
-import { json } from "@remix-run/node";
-import { useLoaderData, useNavigation } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import ProductsModel from "../../db/products";
 import styles from "~/styles/product.css";
+import { motion } from "framer-motion";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -17,14 +17,21 @@ export async function loader({ request, params }) {
 
 function Cart() {
   const data = useLoaderData();
-  const navigation = useNavigation();
-  console.log("navigation", navigation);
-  // console.log("data", data);
 
   return (
-    <div className="product-container">
+    <div className="product-wrapper">
       <div className="product-left">
-        <img src={data.image} alt={data.title} className="product-image" />
+        <motion.div>
+          <motion.img
+            layoutId={data._id}
+            transition={{
+              duration: 0.3,
+            }}
+            src={data.image}
+            alt={data.title}
+            className="product-image"
+          />
+        </motion.div>
         <h1 className="product-title">{data.title}</h1>
       </div>
       <div className="product-right">

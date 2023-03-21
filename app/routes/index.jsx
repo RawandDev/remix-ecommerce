@@ -6,6 +6,7 @@ import imgSrc from "~/assets/nike.jpg";
 import ProductsModel from "../db/products";
 import Card from "../components/Card";
 import cardStyles from "~/styles/card.css";
+import { motion } from "framer-motion";
 
 export async function loader({ request }) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -106,7 +107,7 @@ export default function Index() {
   console.log(data);
 
   return (
-    <div>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <section className="container">
         <img className="hero-image" src={imgSrc} alt="plant" />
         <div className="container__content">
@@ -125,6 +126,6 @@ export default function Index() {
         <Card data={data.top} carts={data.carts} />
         <Card data={data.shoes} carts={data.carts} />
       </section>
-    </div>
+    </motion.div>
   );
 }

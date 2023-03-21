@@ -10,3 +10,13 @@
   margin: 20px 50px;
   transition: all 0.5s ease;
 }
+
+.product-left {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.product-wrapper {
+  overflow: hidden;
+}

@@ -1,8 +1,21 @@
 import { Link, NavLink } from "@remix-run/react";
 import React from "react";
+import { motion, animate } from "framer-motion";
 
 function Navbar({ carts }) {
   const activeClassName = ({ isActive }) => (isActive ? "active" : undefined);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    const node = ref.current;
+    animate(node, {
+      scale: [1, 1.2, 1],
+      transition: {
+        duration: 0.5,
+      },
+    });
+    
+  }, [carts.length]);
 
   return (
     <div
@@ -29,7 +42,7 @@ function Navbar({ carts }) {
             </NavLink>
           </li>
         </ul>
-        <div>{carts?.length}</div>
+        <motion.div ref={ref}>{carts?.length}</motion.div>
       </nav>
     </div>
   );
